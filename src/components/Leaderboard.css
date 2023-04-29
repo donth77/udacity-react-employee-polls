@@ -1,0 +1,37 @@
+.table-container {
+  max-width: 700px;
+  padding: 32px;
+  margin: auto;
+}
+
+.table-cell {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 20px;
+}
+
+.table-header {
+  text-align: center;
+}
+
+.table-cell-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-cell-name h3 {
+  margin: 0;
+}
+
+.table-cell-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: 5px 25px 5px 5px;
+}
+
+.table-cell-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,25 @@
+.add-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.add-form-or-text {
+  margin: 10px;
+}
+
+.add-form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.add-form-container h6 {
+  color: #999;
+}
+
+.add-form-btn {
+  width: 200px;
+  margin: 20px 0 0 0;
+}

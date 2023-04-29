@@ -1,0 +1,15 @@
+.nav {
+  height: 68px;
+  padding-left: calc(100vw - 100%);
+}
+
+.nav-icons {
+  text-align: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
