@@ -33,7 +33,11 @@ function NavigationBar() {
         <Navbar.Brand>Employee Polls</Navbar.Brand>
         <Nav className="me-auto nav-icons">
           {routes.map((route, i) => (
-            <Nav.Link key={i} onClick={() => handleNavigate(route)}>
+            <Nav.Link
+              data-testid={`nav-${route}`}
+              key={i}
+              onClick={() => handleNavigate(route)}
+            >
               <i className={`fa fa-solid ${icons[i]}`}></i>
               <br />
               <span>{route}</span>
@@ -43,6 +47,7 @@ function NavigationBar() {
         {user && (
           <Nav>
             <NavDropdown
+              data-testid="avatar-dropdown"
               title={
                 <>
                   <img src={user.avatarURL} className="avatar" />

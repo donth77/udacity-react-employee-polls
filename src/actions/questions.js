@@ -1,4 +1,5 @@
-import { saveQuestion, saveQuestionAnswer } from "../utils/api";
+import { saveQuestionAnswer, saveFormattedQuestion } from "../utils/api";
+import { formatQuestion } from "../utils/_DATA";
 import toast from "react-hot-toast";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -24,14 +25,16 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
 
+    const newQuestion = formatQuestion({
+      optionOneText,
+      optionTwoText,
+      author: authUser.id,
+    });
+
+    dispatch(addQuestion(newQuestion, authUser.id));
+
     try {
-      const newQuestion = await saveQuestion({
-        optionOneText,
-        optionTwoText,
-        author: authUser.id,
-      });
-      // not optimistic, since UI for this isn't displayed on page that dispatches
-      dispatch(addQuestion(newQuestion, authUser.id));
+      await saveFormattedQuestion(newQuestion);
       toast.success("Added");
     } catch (err) {
       toast.error("Failed to add. Try again");
@@ -55,10 +58,16 @@ export function handleAddQuestionAnswer(questionId, answer) {
 
     dispatch(addQuestionAnswer(questionId, answer, authUser.id));
 
-    await saveQuestionAnswer({
-      authedUser: authUser.id,
-      qid: questionId,
-      answer,
-    });
+    try {
+      await saveQuestionAnswer({
+        authedUser: authUser.id,
+        qid: questionId,
+        answer,
+      });
+      toast.success("Submitted vote");
+    } catch (err) {
+      toast.error("Failed to submit vote. Try again");
+      console.error(err);
+    }
   };
 }

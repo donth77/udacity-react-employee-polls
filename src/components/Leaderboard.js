@@ -1,10 +1,15 @@
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
+import { PropTypes } from "prop-types";
 import Table from "react-bootstrap/Table";
 import "./Leaderboard.css";
 import NavigationBar from "./NavigationBar";
 import FadeInOnLoad from "./FadeInOnLoad";
-import classNames from "classnames";
+
+Leaderboard.propTypes = {
+  loading: PropTypes.bool,
+  leaderboardUsers: PropTypes.array,
+};
 
 function Leaderboard({ loading, leaderboardUsers }) {
   return (
@@ -17,7 +22,7 @@ function Leaderboard({ loading, leaderboardUsers }) {
               <tr>
                 <th>User</th>
                 <th>Answered</th>
-                <th>Created</th>
+                <th>Asked</th>
                 <th>Total</th>
               </tr>
             </thead>
@@ -65,7 +70,7 @@ const mapStateToProps = ({ questions, users }) => ({
     (a, b) =>
       Object.keys(b.answers).length +
       b.questions.length -
-      (Object.keys(a.answers).length + a.questions.length)
+      (Object.keys(a.answers).length + a.questions.length) // users sorted by total number of questions asked and answered
   ),
 });
 

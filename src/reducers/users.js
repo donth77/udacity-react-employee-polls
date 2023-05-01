@@ -20,15 +20,13 @@ export default function users(state = {}, action) {
           },
         },
       };
-
     case ADD_QUESTION_ANSWER:
-      const answersObj = state[action.userId].answers;
       return {
         ...state,
-        ...{
+        [action.userId]: {
           ...state[action.userId],
           answers: {
-            ...answersObj,
+            ...state[action.userId].answers,
             [action.questionId]: action.answer,
           },
         },

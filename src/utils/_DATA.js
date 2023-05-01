@@ -1,4 +1,4 @@
-let users = {
+export let users = {
   sarahedo: {
     id: "sarahedo",
     password: "password123",
@@ -47,7 +47,7 @@ let users = {
   },
 };
 
-let questions = {
+export let questions = {
   "8xf0y6ziyjabvozdd253nd": {
     id: "8xf0y6ziyjabvozdd253nd",
     author: "sarahedo",
@@ -147,7 +147,7 @@ export function _getQuestions() {
   });
 }
 
-function formatQuestion({ optionOneText, optionTwoText, author }) {
+export function formatQuestion({ optionOneText, optionTwoText, author }) {
   return {
     id: generateUID(),
     timestamp: Date.now(),
@@ -161,6 +161,27 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
       text: optionTwoText,
     },
   };
+}
+
+export function _saveFormattedQuestion(formattedQuestion) {
+  return new Promise((resolve, reject) => {
+    if (
+      !formattedQuestion.id ||
+      !formattedQuestion.timestamp ||
+      !formattedQuestion.author
+    ) {
+      reject("Please provide id, timestamp, and author");
+    }
+
+    setTimeout(() => {
+      questions = {
+        ...questions,
+        [formattedQuestion.id]: formattedQuestion,
+      };
+
+      resolve(formattedQuestion);
+    }, 1000);
+  });
 }
 
 export function _saveQuestion(question) {

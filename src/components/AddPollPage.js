@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import { useNavigate } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./AddPollPage.css";
 import { handleAddQuestion } from "../actions/questions";
 
+AddPollPage.propTypes = {
+  dispatch: PropTypes.func,
+};
+
 function AddPollPage({ dispatch }) {
+  const navigate = useNavigate();
   const [opt1Txt, setOpt1Txt] = useState("");
   const [opt2Txt, setOpt2Txt] = useState("");
 
@@ -17,6 +24,7 @@ function AddPollPage({ dispatch }) {
       dispatch(handleAddQuestion(target[0].value, target[1].value));
       setOpt1Txt("");
       setOpt2Txt("");
+      navigate("/"); // navigate back to home page
     }
   };
 
@@ -60,6 +68,7 @@ function AddPollPage({ dispatch }) {
               variant="primary"
               size="md"
               type="submit"
+              disabled={opt1Txt.length === 0 || opt2Txt.length === 0}
             >
               Submit
             </Button>

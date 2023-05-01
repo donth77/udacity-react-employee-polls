@@ -3,6 +3,7 @@ import {
   _getQuestions,
   _saveQuestion,
   _saveQuestionAnswer,
+  _saveFormattedQuestion,
 } from "./_DATA.js";
 
 export function getInitialData() {
@@ -20,4 +21,8 @@ export function saveQuestion(info) {
 
 export function saveQuestionAnswer(info) {
   return _saveQuestionAnswer(info);
+}
+
+export function saveFormattedQuestion(info) {
+  return _saveFormattedQuestion(info);
 }

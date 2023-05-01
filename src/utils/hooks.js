@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// Hook to store the logged in user data in local storage
+// Source: https://blog.logrocket.com/using-localstorage-react-hooks/
 export const useLocalStorage = (keyName, defaultValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {

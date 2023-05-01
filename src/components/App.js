@@ -9,12 +9,12 @@ import LogInPage from "./LogInPage";
 import Dashboard from "./Dashboard";
 import Leaderboard from "./Leaderboard";
 import AddPollPage from "./AddPollPage";
-import { AuthRoute } from "./AuthRoute";
+import AuthRoute from "./AuthRoute";
 import NotFoundPage from "./NotFoundPage";
+import QuestionPage from "./QuestionPage";
 
 App.propTypes = {
   dispatch: PropTypes.func,
-  loggedIn: PropTypes.bool,
 };
 
 function App({ dispatch }) {
@@ -51,6 +51,14 @@ function App({ dispatch }) {
           element={
             <AuthRoute path="/add">
               <AddPollPage />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/question/:qid"
+          element={
+            <AuthRoute path="/question/">
+              <QuestionPage />
             </AuthRoute>
           }
         />

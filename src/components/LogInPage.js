@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import "./LogInPage.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -20,7 +20,6 @@ function LogInPage() {
   const [pass, setPass] = useState("");
   const [showError, setShowError] = useState(false);
 
-  const navigate = useNavigate();
   const { state: navState } = useLocation();
   const { user, login } = useAuth();
 
@@ -38,7 +37,7 @@ function LogInPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const target = e.target;
-    if (target.length > 2) {
+    if (target.length > 2 && target[1] && target[2]) {
       const [submitUser, submitPass] = [target[1].value, target[2].value];
       const success = authenticate(submitUser, submitPass);
       if (success) {
@@ -93,6 +92,7 @@ function LogInPage() {
         </div>
         <Form.Group>
           <Form.Control
+            data-testid="username-field"
             className="username"
             type="username"
             placeholder="Username"
@@ -103,6 +103,7 @@ function LogInPage() {
 
         <Form.Group>
           <Form.Control
+            data-testid="password-field"
             className="password"
             type="password"
             placeholder="Password"
@@ -111,6 +112,7 @@ function LogInPage() {
           />
         </Form.Group>
         <Button
+          data-testid="login-btn"
           className="submit-btn"
           variant="primary"
           size="lg"
